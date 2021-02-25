@@ -103,17 +103,28 @@
 }
 
 #body .message {
-    width: fit-content;
-    background-color: #e4b1e4;
-    color: white;
-    padding: 5px 10px;
-    margin: 10px 0px;
+    width: 52%;
+    /* background-color: #e4b1e4; */
+    color: black;
+    padding: 5px 5px;
+    margin: 5px 0px;
+    font-weight: bold;
+    overflow: auto;
 }
 #body .message span:last-of-type {
     display: block;
+    background-color: #e4b1e4;
+    color: white;
+    padding: 7px;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: 300;
 }
 
-#body .message.out {
-    background-color: turquoise;
+#body .message.in {
     float: right;
+}
+
+#body .message.in span:last-of-type {
+    background-color: turquoise;
 }
