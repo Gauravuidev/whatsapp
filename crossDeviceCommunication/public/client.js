@@ -1,20 +1,30 @@
 let roomID = '';
 let personName = '';
 let messageArea = document.getElementById('body');
-var socket = io(); 
+var socket = io();
+var input = document.getElementById("inputBody");
+input.addEventListener('keyup', function(e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
+})
 
 function enterRoom() {
     personName = document.getElementById('enterName').value;
-    document.getElementsByClassName('loginDetail')[0].style.display = "none";
-    document.getElementsByClassName('enterID')[0].style.display = "block";
-    document.getElementsByClassName('userName')[0].innerHTML = personName;
+    if (personName !== "") {
+        document.getElementsByClassName('loginDetail')[0].style.display = "none";
+        document.getElementsByClassName('enterID')[0].style.display = "block";
+        document.getElementsByClassName('userName')[0].innerHTML = personName;
+    }
 }
 
 function createRoom() {
     personName = document.getElementById('enterName').value;
-    document.getElementsByClassName('loginDetail')[0].style.display = "none";
-    document.getElementsByClassName('createID')[0].style.display = "block";
-    document.getElementsByClassName('userName')[1].innerHTML = personName;
+    if (personName !== "") {
+        document.getElementsByClassName('loginDetail')[0].style.display = "none";
+        document.getElementsByClassName('createID')[0].style.display = "block";
+        document.getElementsByClassName('userName')[1].innerHTML = personName;
+    }
 }
 
 function appendMessage(msg, type) {
@@ -30,46 +40,50 @@ function appendMessage(msg, type) {
 }
 
 function joinRoom(data) {
+
     if (data == 'enter') {
         personName = document.getElementsByClassName('userName')[0].innerHTML;
         roomID = document.getElementById('enterRoomId').value;
-        document.getElementsByClassName('enterID')[0].style.display = "none";
+        if(roomID !== "")
+            document.getElementsByClassName('enterID')[0].style.display = "none";
     } else {
         personName = document.getElementsByClassName('userName')[1].innerHTML;
         roomID = document.getElementById('createRoomId').value;
-        document.getElementsByClassName('createID')[0].style.display = "none";
+        if(roomID !== "")
+            document.getElementsByClassName('createID')[0].style.display = "none";
     }
-
-    document.getElementById('chatting').style.display = "block";
-    document.getElementById('userName').innerHTML = personName;
-    document.getElementById('privateRoomID').innerHTML = roomID;
-
-    // Join a channel
-    var room = roomID;
-    socket.emit("join", room);
-    // Listen to file input events
-    //sendMessage(socket);
+    if(roomID !== "") {
+        document.getElementById('chatting').style.display = "block";
+        document.getElementById('userName').innerHTML = personName;
+        document.getElementById('privateRoomID').innerHTML = roomID;
+    
+        // Join a channel
+        var room = roomID;
+        socket.emit("join", room);
+        // Listen to file input events
+        //sendMessage(socket);   
+    }
 }
 
-function sendMessage(events) {
-        events.stopPropagation();
-        var input = document.getElementById("inputBody");
-        var msg = {
-            text: input.value,
-            name: personName
-        }
+function sendMessage() {
+    var msg = {
+        text: input.value.trim(),
+        name: personName
+    }
+    if (msg.text !== "") {
         appendMessage(msg, 'out');
         scrollToBottom();
         input.value = '';
         socket.emit("message", msg);
     }
+}
 
-    socket.on("message", function (msg) {
-        console.log('msg', msg);
-        appendMessage(msg, 'in');
-        scrollToBottom();
-    });
+socket.on("message", function (msg) {
+    console.log('msg', msg);
+    appendMessage(msg, 'in');
+    scrollToBottom();
+});
 
-function scrollToBottom () {
+function scrollToBottom() {
     messageArea.scrollTop = messageArea.scrollHeight;
 }
