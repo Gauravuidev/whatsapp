@@ -1,0 +1,119 @@
+@media only screen and (max-width:768px) {
+    #chatting {
+        top: 0px !important;
+        left: 0px !important;
+        height: 100% !important;
+        width: 100% !important;
+        border: 0px !important;
+        transform: unset !important;
+    }
+    .loginDetail {
+        border: 17px solid #e2a3e2 !important;
+        padding: 10% !important;
+        width: 70%;
+        height: 50%;
+        box-sizing: border-box;
+    }
+    .loginDetail input {
+        margin: 0px 0px 30px !important;
+    }
+}
+
+.loginDetail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #e2a3e2;
+    padding: 50px;
+}
+
+.loginDetail input {
+    display: block;
+    margin: 0px 60px 30px;
+}
+
+.enterID,
+.createID {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid #e2a3e2;
+    padding: 50px;
+}
+
+#chatting {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 80%;
+    width: 50%;
+    display: none;
+    transform: translate(-50%, -50%);
+    border: 1px solid #e2a3e2;
+    ;
+}
+
+#header,
+#footer {
+    height: 10%;
+    background: #e2a3e2;
+}
+
+#header #userName {
+    color: white;
+    font-size: 40px;
+    padding: 10px 20px;
+}
+
+#header #privateRoomID {
+    color: white;
+    font-size: 40px;
+    padding: 10px 20px;
+    float: right;
+}
+
+#footer #inputBody {
+    box-sizing: border-box;
+    width: 80%;
+    height: 93%;
+    font-size: 24px;
+    border: 0px;
+    border-top: 1px solid #e2a3e2;
+    padding-left: 10px;
+}
+
+#footer button {
+    float: right;
+    height: 100%;
+    width: 18%;
+    font-size: 24px;
+    background: #e2a3e2;
+    color: white;
+    border: 0;
+}
+
+#body {
+    height: 80%;
+    background: white;
+    overflow: auto;
+    width: 100%;
+}
+
+#body .message {
+    width: fit-content;
+    background-color: #e4b1e4;
+    color: white;
+    padding: 5px 10px;
+    margin: 10px 0px;
+}
+#body .message span:last-of-type {
+    display: block;
+}
+
+#body .message.out {
+    background-color: turquoise;
+    float: right;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocketIO Client</title>
+    <link rel="stylesheet" href="index.css"/>
+</head>
+
+<body>
+    <!-- Login -->
+    <div class="loginDetail">
+        <input type="text" id="enterName" placeholder="Enter Your Name" />
+        <button type="button" onclick="enterRoom()">Enter Room ID</button> Or <button type="button"
+            onclick="createRoom()">Create Room ID</button>
+    </div>
+    <div class="enterID">
+        <p>Welcome <span class="userName"></span></p>
+        <input type="text" id="enterRoomId" placeholder="Enter Room ID" />
+        <button type="button" onclick="joinRoom('enter')">Join Room</button>
+    </div>
+
+    <div class="createID">
+        <p>Welcome <span class="userName"></span></p>
+        <input type="text" id="createRoomId" placeholder="Create Room ID" />
+        <button type="button" onclick="joinRoom('create')">Join Room</button>
+    </div>
+
+    <div id="chatting">
+        <!-- File input and image output -->
+        <div id="header">
+            <img height="40" src="pngtree-pink-whatsapp-icon-with-transparent-background-png-image_5533403.jpg" />
+            <label id="userName"></label>
+            <label id="privateRoomID"></label>
+        </div>
+        <div id="body">
+        </div>
+        <div id="footer">
+            <input type="text" id="inputBody" placeholder="type text here" />
+            <button type="button" onclick="sendMessage(event)" id="send">Send</button>
+        </div>
+    </div>
+
+    <!-- server code -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Client Code -->
+    <script src="client.js"></script>
+</body>
+
+</html>
