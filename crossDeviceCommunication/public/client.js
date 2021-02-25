@@ -1,7 +1,7 @@
 let roomID = '';
 let personName = '';
 let messageArea = document.getElementById('body');
-var socket;
+var socket = io(); 
 
 function enterRoom() {
     personName = document.getElementById('enterName').value;
@@ -44,9 +44,6 @@ function joinRoom(data) {
     document.getElementById('userName').innerHTML = personName;
     document.getElementById('privateRoomID').innerHTML = roomID;
 
-    // Get WebSocket
-    socket = io();
-
     // Join a channel
     var room = roomID;
     socket.emit("join", room);
@@ -65,13 +62,13 @@ function sendMessage(events) {
         scrollToBottom();
         input.value = '';
         socket.emit("message", msg);
-
-        socket.on("message", function (msg) {
-            console.log('msg', msg);
-            appendMessage(msg, 'in');
-            scrollToBottom();
-        });
     }
+
+    socket.on("message", function (msg) {
+        console.log('msg', msg);
+        appendMessage(msg, 'in');
+        scrollToBottom();
+    });
 
 function scrollToBottom () {
     messageArea.scrollTop = messageArea.scrollHeight;
